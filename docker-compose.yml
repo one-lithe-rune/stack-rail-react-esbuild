@@ -9,7 +9,6 @@ services:
   web:
     build:
       context: .
-    command: bash bin/dev
     working_dir: /app
     volumes:
       - bundledata:/usr/local/bundle

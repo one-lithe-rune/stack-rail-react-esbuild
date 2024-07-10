@@ -15,7 +15,13 @@ services:
       - .:/app
     ports:
       - "127.0.0.1:3000:3000"
-    # need this or foreman/puma exits immediately
+    # allows contacting REST endpoints running on the host
+    # for development convenience. In real life replace
+    # these with containerised sevices
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # TODO: investigate why we need these entries to prevent
+    # foreman/puma exiting immediately
     tty: true
     stdin_open: true
 

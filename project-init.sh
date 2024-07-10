@@ -6,6 +6,6 @@ docker compose build --build-arg "APPNAME=$project_basename"
 git checkout -b main
 
 docker compose run --rm web bash -c "/app/in-container-scripts/setup-rails-project.sh '$project_basename'"
-docker compose run --rm bash -c "bin/rails db:create"
+docker compose run --rm web bash -c "bin/rails db:create"
 docker compose down
 

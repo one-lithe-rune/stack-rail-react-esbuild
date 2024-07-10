@@ -120,5 +120,27 @@ cat << "EOF" >> config/routes.rb
   Rails.application.routes.draw { root "time#index" }
 EOF
 
+cat << "EOF" >> config/database.yml
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: development
+
+test: &test
+  <<: *default
+  database: test
+
+production:
+  <<: *default
+  database: production
+EOF
+
 # make sure that application is visible outside the docker container
 sed -i 's/server$/server -b 0\.0\.0\.0/' Procfile.dev

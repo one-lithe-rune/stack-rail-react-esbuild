@@ -7,3 +7,6 @@ git checkout -b main
 
 docker compose run web bash -c "/app/in-container-scripts/setup-rails-project.sh '$project_basename'"
 docker compose down
+docker compose run web bash -c "bin/rails db:create"
+docker compose down
+
